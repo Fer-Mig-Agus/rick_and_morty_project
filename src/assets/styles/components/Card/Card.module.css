@@ -1,0 +1,51 @@
+.content {
+    width: 300px;
+    height: 400px;
+    border-radius: 50px;
+    box-shadow: 5px 5px 10px black;
+    overflow: hidden;
+    /* background: rgb(53, 18, 18); */
+}
+
+.button {
+    background-color: red;
+    border-radius: 5px;
+    color: white;
+    margin-left: 70%;
+    margin-top: 5%;
+    height: 35px;
+    width: 35px;
+
+}
+
+.button:hover {
+    background-color: rgb(248, 48, 48);
+    color: black;
+    cursor: pointer;
+}
+
+.name {
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fffffff2;
+    margin-top: -1%;
+}
+
+.species {
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #59e0ff;
+    margin-top: -25px;
+}
+
+.gender {
+    font-size: 29px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #00ffffe8;
+    margin-top: -5%;
+}
+
+.content img {
+    width: 100%;
+    height: 225px;
+}
