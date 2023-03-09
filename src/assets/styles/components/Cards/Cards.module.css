@@ -4,3 +4,11 @@
     justify-content: space-between;
     align-items: center;
 }
+.titulo{
+    font-family: 'Creepster', cursive;
+    -webkit-text-stroke: 5px  white;
+    font-size: 80px;
+    color: #037786;
+    
+    margin-top: 10%;
+}

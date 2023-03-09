@@ -3,39 +3,67 @@ import Card from './components/Card/Card.jsx'
 import Cards from './components/Cards/Cards.jsx'
 import SearchBar from './components/SearchBar/SearchBar.jsx'
 import HeaderNew from "./components/Header/HeaderNew.jsx"
-import characters, { Rick } from './data.js'
+import Nav from "./components/Nav/Nav.jsx";
+import {useState} from 'react';
+//import characters, { Rick } from './data.js'
 
 
 
 function App() {
+
+  const [characters,setCharacters]=useState([]);
+
+  const onSearch=(id)=>{
+
+    const URL_BASE="https://be-a-rym.up.railway.app/api";
+    const KEY="d640439ec558.6d012afc549ba6662537";
+
+    fetch(`${URL_BASE}/character/${id}?key=${KEY}`)
+    .then((response)=>response.json())
+    .then((data)=>{
+      if(data.name && !characters.find((char)=>char.id === data.id)){
+        setCharacters((oldChars)=>[...oldChars,data])
+        // setCharacters([...characters,data])
+      }else{
+        alert("algo salio mal")
+      }
+    })
+  }
+
+  const onClose=(id)=>{
+    setCharacters(
+      characters.filter((char)=>char.id !== id)
+      );
+  }
+
+
+
+//   function onSearch(character) {
+//     fetch(`https://rickandmortyapi.com/api/character/${character}`)
+//        .then((response) => response.json())
+//        .then((data) => {
+//           if (data.name) {
+//              setCharacters((oldChars) => [...oldChars, data]);
+//           } else {
+//              window.alert('No hay personajes con ese ID');
+//           }
+//        });
+//  }
+
   return (
     <div className='App' style={{ padding: '25px' }}>
-      {/* <div>
-        <Card
-          name={Rick.name}
-          species={Rick.species}
-          gender={Rick.gender}
-          image={Rick.image}
-          onClose={() => window.alert('Emulamos que se cierra la card')}
-        />
-  </div> */}
+      
       <div>
         <HeaderNew />
       </div>
-
       <div>
-        <Cards
-          characters={characters}
-        />
+      <Nav onSearch={onSearch}/>
       </div>
-
       <div>
-        <SearchBar
-          onSearch={(characterID) => window.alert(characterID)}
-        />
+        <Cards characters={characters} onClose={onClose} />
       </div>
     </div>
   )
 }
 
-export default App
+export default App;
