@@ -1,11 +1,12 @@
 import React from 'react'
+import About from "../components/About/About.jsx"
 
 const AboutMain = () => {
   return (
     <div>
-      <h1>Este es un mensaje del About</h1>
+      <About/>
     </div>
   )
 }
 
-export default AboutMain
+export default AboutMain;

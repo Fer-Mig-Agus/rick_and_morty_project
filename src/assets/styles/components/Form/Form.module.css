@@ -1,0 +1,90 @@
+
+
+.form{
+    width: 500px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 35%;
+}
+.contentEmail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentPassword{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.label{
+    font-size: 25px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-top: 5px;
+}
+.input{
+    width: 360px;
+    height: 40px;
+    margin-top: 5px;
+    padding-left: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+.eyes{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+.visibility{
+    background: blue;
+    color: white;
+}
+.notVisibility{
+    background: red;
+    color: white;
+}
+
+
+.button{
+    width: 150px;
+    height: 50px;
+    margin-top: 15px;
+    border-radius: 10px;
+    font-size: 25px;
+    background:red;
+    color: white;
+}
+.button:hover{
+    background: rgb(243, 96, 96);
+    color: black;
+    cursor: pointer;
+}
+
+
+
+.success{
+    border:1px solid green;
+    background-color: rgb(103, 169, 125);
+}
+
+.error{
+    border: 1px solid red;
+    background-color: rgb(189, 110, 110);
+}
+.errorSpan{
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    color: red;
+    margin-top: 10px;
+    font-weight: 300;
+    
+}

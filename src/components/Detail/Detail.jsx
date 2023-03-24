@@ -2,7 +2,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from "axios";
+import {Link} from "react-router-dom"
 
 
 function Detail() {
@@ -34,7 +34,8 @@ function Detail() {
     return (
         <div>
             <h1>Bievenido a los detalles</h1>
-            {console.log(character)}
+            <Link to="/home"><h3 >Volver</h3></Link>
+            
             {
                 character.name ?
                     (<>

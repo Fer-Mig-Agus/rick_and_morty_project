@@ -1,84 +1,131 @@
 import './App.css'
-import Card from './components/Card/Card.jsx'
-import Cards from './components/Cards/Cards.jsx'
-import SearchBar from './components/SearchBar/SearchBar.jsx'
-import HeaderNew from "./components/Header/HeaderNew.jsx"
+import { useState,useEffect } from 'react';
 import Nav from "./components/Nav/Nav.jsx";
-import {useState} from 'react';
-import {Routes,Route} from "react-router-dom";
-import About from "./components/About/About.jsx";
+import Error from "./components/Error/Error.jsx"
+import { Routes, Route, useLocation } from "react-router-dom";
 import Detail from "./components/Detail/Detail.jsx";
+import InicioMain from "./views/InicioMain.jsx"
+import AboutMain from "./views/AboutMain.jsx"
+import HomeMain from "./views/HomeMain.jsx"
+import FavoriteMain from './views/FavoriteMain';
+import ErrorComun from './components/ErrorComun/ErrorComun';
+
+
+import { useNavigate } from 'react-router-dom';
 //import characters, { Rick } from './data.js'
 
 
 
 function App() {
 
-  const [characters,setCharacters]=useState([]);
+  const { pathname } = useLocation();
 
-  const onSearch=(id)=>{
+  const [access, setAccess] = useState(false);
 
-    const URL_BASE="https://be-a-rym.up.railway.app/api";
-    const KEY="d640439ec558.6d012afc549ba6662537";
-    if(characters.find((char)=>char.id === id)){
-      return alert("Personaje Repetido");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    !access && navigate("/");
+  }, [access]);
+
+
+  const [characters, setCharacters] = useState([]);
+
+
+  //important: descomentar despues
+  const verificarRuta = () => {
+
+    switch (pathname) {
+      case "/": return false
+      case "/home": return true
+      case "/about": return true
+      case "/favorite": return true
+      case "//detail/:detailId": return false
+      default: return false;
+    }
+  }
+
+  const [alerta, setAlerta] = useState({});
+
+
+
+
+  const onSearch = (id) => {
+
+    const URL_BASE = "https://be-a-rym.up.railway.app/api";
+    const KEY = "d640439ec558.6d012afc549ba6662537";
+    if (characters.find((char) => char.id === id)) {
+
+      setAlerta({ error: true, mensaje: "Personaje Repetido" })
+      setTimeout(() => {
+        setAlerta({})
+      }, 2000)
+
+      return
+
     }
     fetch(`${URL_BASE}/character/${id}?key=${KEY}`)
-    .then((response)=>response.json())
-    .then((data)=>{
-      if(data.name ){
-        setCharacters((oldChars)=>[...oldChars,data])
-        // setCharacters([...characters,data])
-      }else{
-        alert("algo salio mal")
-      }
-    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.name) {
+          setCharacters((oldChars) => [...oldChars, data])
+          // setCharacters([...characters,data])
+        } else {
+
+          setAlerta({ error: true, mensaje: "Fuera del limite" })
+          setTimeout(() => {
+            setAlerta({})
+          }, 2000)
+          return
+
+        }
+      })
   }
 
-  const onClose=(id)=>{
-    setCharacters(
-      characters.filter((char)=>char.id !== id)
-      );
-  }
+  const { mensaje, error } = alerta;
 
 
-
-//   function onSearch(character) {
-//     fetch(`https://rickandmortyapi.com/api/character/${character}`)
-//        .then((response) => response.json())
-//        .then((data) => {
-//           if (data.name) {
-//              setCharacters((oldChars) => [...oldChars, data]);
-//           } else {
-//              window.alert('No hay personajes con ese ID');
-//           }
-//        });
-//  }
-
-
-
-{/* <Nav /> debe que aparecer en todas las rutas.
-<Cards /> debe aparecer sólo en la ruta /home.
-<About /> debe aparecer sólo en la ruta /about.
-<Detail /> debe aparecer sólo en la ruta /detail/:detailId */}
   return (
 
-    
+
+
     <div >
-      <div><Nav onSearch={onSearch}/></div>
-      
-      
+
+
+      {
+        mensaje && <ErrorComun mensaje={mensaje} style={error} />
+      }
+
+      {/* <div><Nav onSearch={onSearch}/></div> */}
+
+      {/*Esto hay que descomentar cuando se haga el login completamente */}
+
+      {
+        verificarRuta() && <Nav onSearch={onSearch} />
+      }
+      {/* 
+      {
+        pathname !== "/" && <Nav onSearch={onSearch} />
+      } */}
+
+
+
+
+
       <Routes>
-      <Route path='/' element={<HeaderNew/>}/>
-      <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
-      <Route path='/about' element={<About />} />    
-      <Route path='//detail/:detailId' element={<Detail />} />
-        
-        
-          
-        
+        <Route path='/' element={<InicioMain />} />
+
+        <Route path='/home' element={
+          <HomeMain characters={characters} setCharacters={setCharacters} />
+        } />
+        <Route path='/favorite' element={<FavoriteMain />} />
+        <Route path='/about' element={<AboutMain />} />
+
+        <Route path='//detail/:detailId' element={<Detail />} />
+
+        <Route path='*' element={<Error />} />
       </Routes>
-      
+
     </div>
   )
 }

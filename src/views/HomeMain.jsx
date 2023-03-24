@@ -1,9 +1,18 @@
 import React from 'react'
+import Cards from "../components/Cards/Cards.jsx"
 
-const HomeMain = () => {
+const HomeMain = ({characters,setCharacters}) => {
+
+  const onClose=(id)=>{
+    setCharacters(
+      characters.filter((char)=>char.id !== id)
+      );
+  }
+
+
   return (
     <div>
-      <h1>Este es un mensaje del home main</h1>
+      <Cards characters={characters} onClose={onClose} />
     </div>
   )
 }
