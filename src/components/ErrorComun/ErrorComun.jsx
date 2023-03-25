@@ -4,7 +4,7 @@ import styles from "../../assets/styles/components/ErrorComun/ErrorComun.module.
 const ErrorComun = ({style,mensaje}) => {
   return (
     <div className={styles.content}>
-      <div className={style ? styles.failed : styles.success}>
+      <div className={`${style ? styles.failed : styles.success} ${styles.contentError}`}>
         <p className={styles.parrafo}>{mensaje}</p>
       </div>
     </div>

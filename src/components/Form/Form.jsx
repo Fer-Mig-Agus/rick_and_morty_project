@@ -5,6 +5,7 @@ import { validateEmail, validatePass } from './validation';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAccess } from '../../redux/actions';
+import ErrorComun from '../ErrorComun/ErrorComun';
 
 
 
@@ -42,7 +43,10 @@ const Form = () => {
             //setForm({...form,email:"", password:""})
         }else{
             dispatch(setAccess(false));
-            alert("Error");
+            setAlerta({ error: true, mensaje: "Correo o Contraseña incorrecta" })
+          setTimeout(() => {
+            setAlerta({})
+          }, 2000)
         }
     }
 
@@ -94,8 +98,16 @@ const Form = () => {
         login(form);
     }
 
+
+    const [alerta, setAlerta] = useState({});
+    const { mensaje, error } = alerta;
+
     return (
         <div>
+            {
+        mensaje && <ErrorComun mensaje={mensaje} style={error} />
+      }
+
             <form  className={styles.form} onSubmit={submitHandler}>
                 <div className={styles.contentEmail} >
                     <label className={styles.label} htmlFor="email">Email:</label>
