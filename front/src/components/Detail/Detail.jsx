@@ -12,11 +12,11 @@ function Detail() {
     const [character, setCharacter] = useState({});
 
     useEffect(() => {
+        const URL_BASE="http://localhost:3001/rickandmorty";
+        // const URL_BASE = "https://be-a-rym.up.railway.app/api";
+        // const KEY = "d640439ec558.6d012afc549ba6662537";
 
-        const URL_BASE = "https://be-a-rym.up.railway.app/api";
-        const KEY = "d640439ec558.6d012afc549ba6662537";
-
-        fetch(`${URL_BASE}/character/${detailId}?key=${KEY}`)
+        fetch(`${URL_BASE}/detail/${detailId}`)
             .then((response) => response.json())
             .then((data) => {
                 (data.name) ? setCharacter(data) : alert("No esta el ID")
