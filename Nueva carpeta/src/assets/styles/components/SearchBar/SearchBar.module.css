@@ -1,0 +1,31 @@
+.content{
+    height: 100px;
+    display: flex;
+    
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.input{
+    width: 30%;
+    height: 50px;
+    padding-left: 15px;
+    border-radius: 20px 0px 0px 20px;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.button{
+    width: 10%;
+    height: 50px;
+    background: linear-gradient(180deg,#1A1ED1,#C143B9);
+    color: white;
+    font-size: 20px;
+    border-radius: 0px 20px 20px 0px;
+}
+.button:hover{
+    background: linear-gradient(180deg,#C143B9,#1A1ED1);
+    color: black;
+    cursor: pointer;
+}
