@@ -3,10 +3,17 @@ import { useState,useEffect } from 'react';
 import styles from "../../assets/styles/components/Form/Form.module.css";
 import { validateEmail, validatePass } from './validation';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAccess } from '../../redux/actions';
+
 
 
 
 const Form = () => {
+
+    const access=useSelector(state=>state.access);
+    const dispatch=useDispatch();
+
     //Creo el estado para el formulario
     const [form, setForm] = useState({
         email: "",
@@ -22,7 +29,6 @@ const Form = () => {
     
 
     const navigate = useNavigate();
-    const [access, setAccess] = useState(false);
     const username = 'ejemplo@gmail.com';
     const password = '1password';
 
@@ -31,11 +37,11 @@ const Form = () => {
         
         if (userData.password === password && userData.email === username) {
             
-            setAccess(true);
+            dispatch(setAccess(true));
             navigate('/home');
             //setForm({...form,email:"", password:""})
         }else{
-            setAccess(false);
+            dispatch(setAccess(false));
             alert("Error");
         }
     }

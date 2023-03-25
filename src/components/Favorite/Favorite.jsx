@@ -46,26 +46,22 @@ const Favorite = () => {
     console.log(value);
     switch (value) {
       case "All":
-        
         return setFilterCard("All");
       case "Male":
-        
         return setFilterCard("Male");
       case "Female":
-        
         return setFilterCard("Female");
       case "Genderless":
-        
         return setFilterCard("Genderless");
       case "unknown":
-        
         return setFilterCard("unknown");
       default: 
-        
         return setFilterCard("All");
-
     }
   }
+  useEffect(()=>{
+
+  },[favorites]);
 
   useEffect(() => {
     dispatch(allFavorites());

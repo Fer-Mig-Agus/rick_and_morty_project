@@ -11,7 +11,10 @@ import FavoriteMain from './views/FavoriteMain';
 import ErrorComun from './components/ErrorComun/ErrorComun';
 
 
+
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 //import characters, { Rick } from './data.js'
 
 
@@ -20,7 +23,8 @@ function App() {
 
   const { pathname } = useLocation();
 
-  const [access, setAccess] = useState(false);
+  
+  const access=useSelector(state=>state.access);
 
   const navigate = useNavigate();
 
@@ -34,7 +38,7 @@ function App() {
 
   //important: descomentar despues
   const verificarRuta = () => {
-
+    
     switch (pathname) {
       case "/": return false
       case "/home": return true
@@ -51,6 +55,7 @@ function App() {
 
 
   const onSearch = (id) => {
+    
 
     const URL_BASE = "https://be-a-rym.up.railway.app/api";
     const KEY = "d640439ec558.6d012afc549ba6662537";

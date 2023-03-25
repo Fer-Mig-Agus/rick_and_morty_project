@@ -5,6 +5,7 @@ export const REMOVE_FAVORITE="REMOVE_FAVORITE";
 export const FILTER_CARDS="FILTER_CARDS";
 export const ORDER_CARDS="ORDER_CARDS";
 export const ALL_FAVORITES="ALL_FAVORITES";
+export const SET_ACCESS="SET_ACCESS";
 
 
 export const allFavorites=()=>{
@@ -27,4 +28,8 @@ export const filterCards=(status)=>{
 export const orderCards=(tipo)=>{
     
     return {type:ORDER_CARDS,payload:tipo}
+}
+
+export const setAccess=(acceso)=>{
+    return {type: SET_ACCESS,payload:acceso};
 }

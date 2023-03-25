@@ -1,8 +1,9 @@
-import { ADD_FAVORITE, REMOVE_FAVORITE, ORDER_CARDS, FILTER_CARDS, ALL_FAVORITES } from "../redux/actions.js";
+import { ADD_FAVORITE, REMOVE_FAVORITE, ORDER_CARDS, FILTER_CARDS, ALL_FAVORITES, SET_ACCESS } from "../redux/actions.js";
 
 const initialState = {
     allCharacters: [],
     myFavorites: [],
+    access:false,
 }
 
 export default function Reducer(state = initialState, action) {
@@ -51,6 +52,11 @@ export default function Reducer(state = initialState, action) {
                 ...state,
                 allCharacters: ordenarArray(action.payload, state.allCharacters)
 
+            }
+        case SET_ACCESS:
+            return{
+                ...state,
+                access:action.payload
             }
 
 
